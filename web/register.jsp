@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>注册界面</title>
 </head>
 <body>
-
+<form action="ss" method="post">
+    <input type="text" name="empno" placeholder="请输入员工编号"><br/>
+    <input type="text" name="ename" placeholder="请输入员工姓名"><br/>
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>

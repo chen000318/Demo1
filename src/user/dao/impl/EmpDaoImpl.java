@@ -27,22 +27,49 @@ public class EmpDaoImpl implements IEmpDao {
 
     @Override
     public int insert(Emp emp) {
-        return 0;
+        String sql = "insert into emp values(?,?)";
+        int num = upd(sql,emp.getEmpno(),emp.getEname());
+        return num;
     }
 
     @Override
     public int delete(Emp emp) {
+        String sql = "delete from emp where empno=?";
+        int num = upd(sql,emp.getEmpno());
         return 0;
     }
 
     @Override
     public int update(Emp emp) {
-        return 0;
+        String sql = "update emp set ename=?,job=?,mgr=?,hiredate=?,sal=?,comm=?,deptno=? where empno=?";
+        int num = upd(sql,emp.getEname(),emp.getJob(),emp.getMgr(),emp.getHiredate(),emp.getSal(),
+                emp.getComm(),emp.getDeptno(),emp.getEmpno());
+        return num;
     }
 
     @Override
     public int verifyingLogin(Emp emp) {
-        return 0;
+        String sql = "select * from emp where empno=? and ename=?";
+        int num = 0;
+        try {
+            con = DBHelper.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,emp.getEmpno());
+            ps.setString(2,emp.getEname());
+            rs = ps.executeQuery();
+            if(rs.next()){
+                num = 1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBHelper.closeAll(con,ps,rs);
+        }
+        return num;
     }
 
     /*
