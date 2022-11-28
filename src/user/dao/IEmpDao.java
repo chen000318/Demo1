@@ -4,7 +4,7 @@ import user.entry.Emp;
 
 import java.util.List;
 
-public interface IUserDao {
+public interface IEmpDao {
     /*
     * 根据员工编号查询员工信息
     * */

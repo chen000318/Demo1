@@ -4,7 +4,7 @@ import user.entry.Emp;
 
 import java.util.List;
 
-public interface IUserBiz {
+public interface IEmpBiz {
     /*
     * 注册功能
     * */

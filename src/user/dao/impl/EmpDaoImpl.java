@@ -1,6 +1,6 @@
 package user.dao.impl;
 
-import user.dao.IUserDao;
+import user.dao.IEmpDao;
 import user.entry.Emp;
 import user.util.DBHelper;
 
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDaoImpl implements IUserDao {
+public class EmpDaoImpl implements IEmpDao {
     Connection con;
     PreparedStatement ps;
     ResultSet rs;

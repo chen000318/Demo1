@@ -1,11 +1,11 @@
 package user.biz.impl;
 
-import user.biz.IUserBiz;
+import user.biz.IEmpBiz;
 import user.entry.Emp;
 
 import java.util.List;
 
-public class UserBizImpl implements IUserBiz {
+public class EmpBizImpl implements IEmpBiz {
     @Override
     public boolean rigister(Emp emp) {
         return false;
