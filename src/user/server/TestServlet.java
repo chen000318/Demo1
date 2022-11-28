@@ -19,16 +19,23 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf8");
         String i = request.getParameter("i");
-        if("1".equals(i)){
-            delete(request,response);
+        if(i==null){
+            response.sendRedirect("index.jsp");
+        }else {
+            if("1".equals(i)){
+                delete(request,response);
+                showAll(request,response);
+            }
+            if("2".equals(i)){
+                update(request,response);
+            }
+            if("3".equals(i)){
+                showAll(request,response);
+            }
         }
-        if("2".equals(i)){
-            update(request,response);
-        }
-        if("3".equals(i)){
-            showAll(request,response);
-        }
+
     }
 
     public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -56,9 +63,9 @@ public class TestServlet extends HttpServlet {
             emp.setComm(Double.parseDouble(request.getParameter("comm")));
             emp.setDeptno(Integer.parseInt(request.getParameter("deptno")));
             if(empBiz.updateEmp(emp)){
-                response.getWriter().println("<script>alert('修改成功')</script>location.href='showAll.jsp?i=3'");
+                response.getWriter().println("<script>alert('修改成功');location.href='ss?i=3'</script>");
             }else {
-                response.getWriter().println("<script>alert('修改失败,请重新修改')</script>location.href='update.jsp'");
+                response.getWriter().println("<script>alert('修改失败,请重新修改');location.href='update.jsp'</script>");
             }
         }
     }
@@ -70,7 +77,7 @@ public class TestServlet extends HttpServlet {
         if(empBiz.delete(emp)){
             showAll(request,response);
         }else {
-            response.getWriter().println("<script>alert('删除失败')</script>location.href='showAll.jsp'");
+            response.getWriter().println("<script>alert('删除失败');location.href='showAll.jsp'</script>");
         }
     }
 
@@ -79,6 +86,7 @@ public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf8");
         String i = request.getParameter("i");
         if(i==null){
             login(request,response);
@@ -92,15 +100,18 @@ public class TestServlet extends HttpServlet {
     }
 
     public void rigister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf8");
         EmpBizImpl empBiz = new EmpBizImpl();
         Emp emp = new Emp();
         emp.setEname(request.getParameter("ename"));
         emp.setEmpno(Integer.parseInt(request.getParameter("empno")));
         if(empBiz.rigister(emp)){
-            response.getWriter().println("<script>alert('注册成功')</script>location.href='index.jsp'");
+            System.out.println(111);
+            response.getWriter().println("<script>alert('注册成功');location.href='index.jsp'</script>");
         }else {
-            response.getWriter().println("<script>alert('用户已存在,请重新注册')</script>location.href='register.jsp'");
+            response.getWriter().println("<script>alert('用户已存在,请重新注册');location.href='register.jsp'</script>");
         }
     }
 
@@ -113,14 +124,17 @@ public class TestServlet extends HttpServlet {
     }
 
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf8");
         EmpBizImpl empBiz = new EmpBizImpl();
         Emp emp = new Emp();
-        emp.setDeptno(Integer.parseInt(request.getParameter("deptno")));
+        emp.setEmpno(Integer.parseInt(request.getParameter("empno")));
         emp.setEname(request.getParameter("ename"));
         if(empBiz.login(emp)){
             showAll(request,response);
         }else {
-            response.getWriter().println("<script>alert('用户名或密码错误')</script>location.href='index.jsp'");
+            response.getWriter().println("<script>alert('用户名或密码错误');location.href='index.jsp'</script>");
         }
     }
 

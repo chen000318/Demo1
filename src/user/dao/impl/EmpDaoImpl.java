@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class EmpDaoImpl implements IEmpDao {
 
     @Override
     public int insert(Emp emp) {
-        String sql = "insert into emp values(?,?)";
+        String sql = "insert into emp(empno,ename) values(?,?)";
         int num = upd(sql,emp.getEmpno(),emp.getEname());
         return num;
     }
@@ -98,9 +99,13 @@ public class EmpDaoImpl implements IEmpDao {
     @Override
     public int update(Emp emp) {
         String sql = "update emp set ename=?,job=?,mgr=?,hiredate=?,sal=?,comm=?,deptno=? where empno=?";
-        int num = upd(sql,emp.getEname(),emp.getJob(),emp.getMgr(),emp.getHiredate(),emp.getSal(),
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        if(emp.getHiredate()==null)
+            return upd(sql,emp.getEname(),emp.getJob(),emp.getMgr(),emp.getHiredate(),emp.getSal(),
+                    emp.getComm(),emp.getDeptno(),emp.getEmpno());
+        else
+        return upd(sql,emp.getEname(),emp.getJob(),emp.getMgr(),s.format(emp.getHiredate()),emp.getSal(),
                 emp.getComm(),emp.getDeptno(),emp.getEmpno());
-        return num;
     }
 
     @Override

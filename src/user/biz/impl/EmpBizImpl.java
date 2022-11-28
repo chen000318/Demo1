@@ -1,21 +1,25 @@
 package user.biz.impl;
 
-import user.biz.IUserBiz;
-import user.dao.impl.UserDaoImpl;
+import user.biz.IEmpBiz;
+import user.dao.impl.EmpDaoImpl;
 import user.entry.Emp;
 
 import java.util.List;
 
-public class UserBizImpl implements IUserBiz {
-    UserDaoImpl userDao=new UserDaoImpl();
+public class EmpBizImpl implements IEmpBiz {
+
+    EmpDaoImpl userDao = new EmpDaoImpl();
+
     @Override
     public boolean rigister(Emp emp) {
-        return false;
+
+        return userDao.insert(emp)==1?true:false;
     }
 
     @Override
     public boolean login(Emp emp) {
-        return false;
+
+        return userDao.verifyingLogin(emp)==1?true:false;
     }
 
     @Override
@@ -25,12 +29,14 @@ public class UserBizImpl implements IUserBiz {
 
     @Override
     public boolean delete(Emp emp) {
-        return false;
+
+        return userDao.delete(emp)==1?true:false;
     }
 
     @Override
     public boolean updateEmp(Emp emp) {
-        return false;
+
+        return userDao.update(emp)==1?true:false;
     }
 
     @Override
