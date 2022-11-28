@@ -1,11 +1,13 @@
 package user.biz.impl;
 
 import user.biz.IUserBiz;
+import user.dao.impl.UserDaoImpl;
 import user.entry.Emp;
 
 import java.util.List;
 
 public class UserBizImpl implements IUserBiz {
+    UserDaoImpl userDao=new UserDaoImpl();
     @Override
     public boolean rigister(Emp emp) {
         return false;
@@ -18,7 +20,7 @@ public class UserBizImpl implements IUserBiz {
 
     @Override
     public List<Emp> showAll() {
-        return null;
+        return userDao.queryAll();
     }
 
     @Override
@@ -33,6 +35,6 @@ public class UserBizImpl implements IUserBiz {
 
     @Override
     public Emp showEmp(Emp emp) {
-        return null;
+        return userDao.queryByEmpno(emp);
     }
 }
