@@ -29,4 +29,9 @@ public interface IUserDao {
     * 更改功能
     * */
     public int update(Emp emp);
+
+    /*
+    * 验证登录
+    * */
+    public int verifyingLogin(Emp emp);
 }
